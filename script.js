@@ -192,6 +192,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const formToast = document.getElementById('formToast');
 
     if (projectForm && formToast) {
+        const submitBtn = projectForm.querySelector('button[type="submit"]');
+        const submitBtnText = submitBtn ? submitBtn.querySelector('span') : null;
+
         projectForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -203,19 +206,60 @@ document.addEventListener('DOMContentLoaded', () => {
             const budget = document.getElementById('formBudget').value;
             const message = document.getElementById('formMessage').value;
 
-            // Simple client verification log
+            // Log submission internally for debugging
             console.log("Inquiry Submitted:", { name, email, phone, projectType, budget, message });
 
-            // Simulate form submission to backend and trigger premium visual toast
-            formToast.classList.add('active');
+            // Disable button & show loading state
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                if (submitBtnText) submitBtnText.textContent = "Sending...";
+            }
 
-            // Reset Form fields
-            projectForm.reset();
+            // POST to FormSubmit AJAX endpoint
+            fetch("https://formsubmit.co/ajax/krushna.sahu3012@gmail.com", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    "Name": name,
+                    "Email": email,
+                    "Phone": phone,
+                    "Project Type": projectType,
+                    "Budget": budget,
+                    "Message": message
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Form submission failed");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Show visual success toast
+                formToast.classList.add('active');
+                
+                // Reset form fields
+                projectForm.reset();
 
-            // Clear Toast after 5 seconds
-            setTimeout(() => {
-                formToast.classList.remove('active');
-            }, 5000);
+                // Clear Toast after 5 seconds
+                setTimeout(() => {
+                    formToast.classList.remove('active');
+                }, 5000);
+            })
+            .catch(error => {
+                console.error("Submission error:", error);
+                alert("Oops! There was an issue sending your inquiry. Please try again or email me directly at krushna.sahu3012@gmail.com.");
+            })
+            .finally(() => {
+                // Restore button state
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    if (submitBtnText) submitBtnText.textContent = "Submit Project Inquiry";
+                }
+            });
         });
     }
 });

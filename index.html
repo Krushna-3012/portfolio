@@ -688,22 +688,22 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="formName">Full Name <span class="required">*</span></label>
-                                <input type="text" id="formName" required placeholder="John Doe">
+                                <input type="text" id="formName" name="Name" required placeholder="John Doe">
                             </div>
                             <div class="form-group">
                                 <label for="formEmail">Email Address <span class="required">*</span></label>
-                                <input type="email" id="formEmail" required placeholder="john@example.com">
+                                <input type="email" id="formEmail" name="Email" required placeholder="john@example.com">
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="formPhone">Phone Number</label>
-                                <input type="tel" id="formPhone" placeholder="+91 98765 43210">
+                                <input type="tel" id="formPhone" name="Phone" placeholder="+91 98765 43210">
                             </div>
                             <div class="form-group">
                                 <label for="formProjectType">Project Type <span class="required">*</span></label>
-                                <select id="formProjectType" required>
+                                <select id="formProjectType" name="Project Type" required>
                                     <option value="" disabled selected>Select a Service</option>
                                     <option value="social-media">Social Media Creatives</option>
                                     <option value="logo-branding">Logo & Branding Design</option>
@@ -718,12 +718,12 @@
 
                         <div class="form-group">
                             <label for="formBudget">Estimated Budget (INR / USD)</label>
-                            <input type="text" id="formBudget" placeholder="e.g. ₹5,000 / $100">
+                            <input type="text" id="formBudget" name="Budget" placeholder="e.g. ₹5,000 / $100">
                         </div>
 
                         <div class="form-group">
                             <label for="formMessage">Project Details / Message <span class="required">*</span></label>
-                            <textarea id="formMessage" rows="5" required placeholder="Explain your design goals, timeline, and requirements..."></textarea>
+                            <textarea id="formMessage" name="Message" rows="5" required placeholder="Explain your design goals, timeline, and requirements..."></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-full">
