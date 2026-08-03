@@ -1234,6 +1234,24 @@ section {
     line-height: 1.6;
 }
 
+.service-card-logos {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.service-card-logos i {
+    width: 20px;
+    height: 20px;
+    color: var(--text-muted);
+    transition: var(--transition-smooth);
+}
+
+.service-card:hover .service-card-logos i {
+    color: var(--accent-purple);
+}
+
 /* ==========================================================================
    Availability Section
    ========================================================================== */
