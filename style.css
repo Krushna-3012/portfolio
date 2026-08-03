@@ -1303,6 +1303,18 @@ section {
     transform: scale(1.05);
 }
 
+.service-image-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    transition: var(--transition-smooth);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+}
+
+.service-card:hover .service-image-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
 .service-card h3 {
     font-family: var(--font-heading);
     font-size: 1.4rem;
