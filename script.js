@@ -186,7 +186,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ==========================================================================
-    // Contact Form Handler & Toast Notification
+    // Contact Form Handler (Direct to WhatsApp) & Toast Notification
     // ==========================================================================
-    // Form submission is handled natively by the HTML form action in index.html.
+    const projectForm = document.getElementById('projectForm');
+    const formToast = document.getElementById('formToast');
+
+    if (projectForm) {
+        projectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Extract Form Values
+            const name = document.getElementById('formName').value;
+            const email = document.getElementById('formEmail').value;
+            const phone = document.getElementById('formPhone').value || 'Not provided';
+            const projectSelect = document.getElementById('formProjectType');
+            const projectType = projectSelect.options[projectSelect.selectedIndex].text;
+            const budget = document.getElementById('formBudget').value || 'Not provided';
+            const message = document.getElementById('formMessage').value;
+
+            // Formulate WhatsApp message text
+            const whatsappText = `*New Project Inquiry on Portfolio* \n\n` +
+                `*Name:* ${name}\n` +
+                `*Email:* ${email}\n` +
+                `*Phone:* ${phone}\n` +
+                `*Project Type:* ${projectType}\n` +
+                `*Budget:* ${budget}\n` +
+                `*Details:* ${message}`;
+
+            // Encode message for URL
+            const encodedText = encodeURIComponent(whatsappText);
+            const whatsappUrl = `https://wa.me/916372582866?text=${encodedText}`;
+
+            // Show Toast Success Notification
+            if (formToast) {
+                formToast.classList.add('active');
+                setTimeout(() => {
+                    formToast.classList.remove('active');
+                }, 5000);
+            }
+
+            // Reset form fields
+            projectForm.reset();
+
+            // Open WhatsApp in a new tab
+            window.open(whatsappUrl, '_blank');
+        });
+    }
 });
