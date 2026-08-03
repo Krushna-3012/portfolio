@@ -1227,7 +1227,8 @@ section {
     justify-content: center;
     box-shadow: 0 6px 12px rgba(238, 42, 123, 0.22);
 }
-.icon-instagram i {
+.icon-instagram i,
+.icon-instagram svg {
     color: #ffffff !important;
     width: 28px !important;
     height: 28px !important;
